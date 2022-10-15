@@ -1,0 +1,184 @@
+/* General HTML elements */
+body{
+    height: 100vh;
+    background-color: #2c2c2c;
+} 
+.container{
+    height: 100%;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+h2, h3{
+	color: #fff;
+}
+
+thead{
+	 color: #d1d1d1;
+	 background-color: #373737;
+	 font-size: 15px;
+	 border-bottom: hidden;
+}
+
+table th:first-child{
+  border-radius:5px 0 0 5px;
+  
+}
+
+table th:last-child{
+  border-radius:0 5px 5px 0;
+}
+
+table tr:last-child{
+  	border-bottom: thin solid #797979;
+}
+
+td {
+	font-size: 15px;
+  	border-bottom: thin solid #797979;
+}
+
+label{
+	color: #b2b3b4;
+}
+
+input[type="text"]{
+	  color: #fff;
+	  border: 0.5px solid #45484a;
+	  background-color: #373737;
+}
+
+input[type="text"]:disabled{background-color:#323644;}
+
+input[type=text]:focus {
+	color: #fff;
+	border: 1px solid #45484a;
+	background-color: #373737;
+}
+
+logo{
+	color: #fff;
+}
+/* Table class elements */
+
+.tableOverallDiv {
+ 	border: 0.5px solid #45484a;
+ 	padding: 20px 40px;	
+ 	height: 450px;
+}
+
+.tableDisplayDiv {
+/* 	background-color: red;
+ */	width: 100%;
+	overflow-y: auto;
+}
+
+.table {
+	border: hidden;
+	color: #b2b3b4;
+			border-bottom: thin solid #797979;	
+}
+
+.table tr {
+	line-height: 24px;
+}
+
+.primary {
+	background-color: #4270ff;
+}
+
+.headerRow{
+	margin-top: 20px;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn {
+	font-size: 15px;
+}
+
+.alert{
+  margin-bottom: 1px;
+  height: 34px;
+  line-height:30px;
+  padding:0px 15px;
+  margin-top: 2px;
+ }
+
+/* Modal class elements */
+
+.modal-lg {
+	max-width: 520px;
+}
+
+.modalDelete{
+	height: 240px;
+}
+
+.modalDeleteBody{
+	width: 98%;
+}
+
+.modal-content{
+	color: #fff;
+	padding: 10px 16px;
+	background-color: #2c2c2c;
+	border: 0.5px solid #45484a;
+}
+
+.modal-footer {
+	margin-top: -15px;
+}
+
+/* Form class elements */
+
+.myform{
+	margin-top: -35px;
+}
+
+.form-group {
+    margin-top: -9px;
+}
+
+.card{
+	color: #fff;
+	height: 80px;	
+	background-color: #2C2C2C;
+	border: 0.5px solid #45484a;
+}
+
+.card:hover{
+	background-color: #444444;
+}
+
+.card-text{
+	margin-top: -12px;
+}
+
+.submit-button,
+.close-button{
+	width: 47%;
+}
+
+.close{
+	color: #fff;
+}
+
+.secondaryText{
+	color: #dfdfe1;
+	font-size: 14px;
+}

@@ -1,0 +1,237 @@
+<html xmlns:th="httl://www.thymeleaf.org">
+	<head>
+		<title>Wiley Academy: Student List</title>
+		
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+          <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+        </script>
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/ajaxscript.js"></script>
+	</head>
+	<body>
+		<div class="container d-flex flex-column justify-content-center">
+		<h2 class="mb-4"><a href="http://localhost:8989/students">👋</a> &nbsp; Welcome to Wiley Academy!</h2>				
+		<!-- Card that opens modal to respective functionalities -->
+		<div class="row mb-3">
+		  <div class="col-sm-4 ">
+		    <div class="card d-flex justify-content-center">
+		      <div class="card-body d-flex">
+			      <div class="ml-1 mr-3">
+			      	<img src="/images/plus.png" height="32" width="32">
+			      </div>
+			      <div>
+			      	<h6 class="card-title">Add Student</h6>
+		        	<p class="card-text secondaryText">Create and add Student data.</p>	
+			      </div>
+		         <a href="#" class="stretched-link" data-toggle="modal" data-target="#addModal"></a>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="col-sm-4">
+		    <div class="card d-flex justify-content-center ">
+		      <div class="card-body d-flex">
+		      	 <div class="ml-1 mr-3">
+			      	<img src="/images/quote.png" height="32" width="32">
+			     </div>
+			     <div>
+			     	<h6 class="card-title">Update Student</h6>
+		        	<p class="card-text secondaryText">Update existing Student data.</p>
+			     </div>
+		       	<a href="#" class="stretched-link" data-toggle="modal" data-target="#updateModal"></a>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="col-sm-4">
+		    <div class="card d-flex justify-content-center">
+		      <div class="card-body d-flex">
+		      	 <div class="ml-1 mr-3">
+			      	<img src="/images/trash.png" height="32" width="32">
+			     </div>
+			     <div>
+			     	<h6 class="card-title">Delete Student</h6>
+		        	<p class="card-text secondaryText">Delete existing Student data.</p>
+			     </div>
+		        <a href="#" class="stretched-link" data-toggle="modal" data-target="#deleteModal"></a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="tableOverallDiv d-flex flex-column">
+			<div class="d-flex justify-content-between align-items-end">
+				<div class="titleDiv flex-column">
+					<h3 class="modal-title " id="#deleteModalLabel">Students</h3>
+					 <p class="secondaryText">List of students within Wiley Academy</p>
+				</div>
+				<div class="searchDiv">
+					<form th:action="@{/students}">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" autocomplete="off" name="keyword" id="keyword" placeholder="Enter Name">
+						<div class="input-group-append">
+							<button class="btn primary btn-primary" id="searchButton" type="submit">Search</button>
+						</div>
+					</div>	
+					</form>
+				</div>
+			</div>
+			
+			<div class="tableDisplayDiv d-flex justify-content-center align-self-start mt-3">
+				<table class="table">
+				
+					<thead>
+						<tr>
+							<th class ="align-middle pl-4" style="width: 18%;">Name</th>
+							<th class ="align-middle" style="width: 10%;">Age</th>
+							<th class ="align-middle" style="width: 15%">Mobile Number</th>
+							<th class ="align-middle" style="width: 20%">Email</th>
+							<th class ="align-middle" style="width: 20%">Address</th>
+						</tr>
+					</thead>
+					<tbody class="tableBodyDiv">
+						<tr class="my-2" th:each="student: ${students}">
+							<td class ="align-middle pl-4" th:text="${student.sname}" />
+							<td class ="align-middle" th:text="${student.age}" />
+							<td class ="align-middle" th:text="${student.mobile}" />
+							<td class ="align-middle" th:text="${student.email}" />
+							<td class ="align-middle" th:text="${student.address}" />
+						</tr>
+					</tbody>
+				</table>	
+			<div> 
+		</div>
+		
+		<div class = "d-flex justify-content-center align-items-center">
+		
+			<!-- Add Modal -->
+			<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="#addModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header d-flex border-0">
+			      <div class="d-flex flex-column mx-3 pb-0">
+			     	<h4 class="modal-title " id="#addModalLabel">Add student</h4>
+			        <p class="secondaryText">Please enter the student particulars you wish to add</p>
+			      </div>
+			      </div>
+			      <div class="modal-body">
+			        <form class="myform addform needs-validation mx-3" id="addForm">
+			        	<div id="postResultDiv" align="center"></div>
+			       		<div class="form-group has-validation">
+				            <label for="addSname" class="col-form-label">Name:</label>
+				            <input type="text" class="form-control" name="addSname" id="addSname" placeholder="Enter name" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="addAge" class="col-form-label">Age:</label>
+				            <input type="text" class="form-control" name="addAge" id="addAge" placeholder="Enter age"  required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="addEmail" class="col-form-label">Email:</label>
+				            <input type="text" class="form-control" name="addEmail" id="addEmail" placeholder="Enter email" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="addMobile" class="col-form-label">Mobile number:</label>
+				            <input type="text" class="form-control" name="addMobile" id="addMobile" placeholder="Enter mobile number" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="addAddress" class="col-form-label">Address:</label>
+				            <input type="text" class="form-control" name="addAddress" id="addAddress" placeholder="Enter address" required>
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer border-0 d-flex justify-content-between mx-3 mb-3">
+			      	<button type="button" id="addclose" onClick="window.location.reload()" class="btn close-button btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="submit" id="addButton" class="btn primary submit-button btn-primary">Add Student</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+			<!-- Update Modal -->
+			<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="#updateModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header border-0">
+			      <div class="d-flex flex-column mx-3 pb-0">
+			     	<h4 class="modal-title " id="#addModalLabel">Update student</h4>
+			        <p class="secondaryText">Please enter an existing student id in order to edit data</p>
+			      </div>
+			      </div>
+			      <div class="modal-body">
+			        <form class="myform retrieveform mx-3">
+			        <div class="form-group retrieveInputGroup" >
+				            <label for="id" class="col-form-label">Student Id:</label>
+								<div class="input-group mb-3">
+								  <input type="text" class="form-control" name="retrieveid" id="retrieveid" placeholder="Enter Student's id">
+								  <div class="input-group-append">
+								    <button class="btn primary btn-primary" id="retrieveButton" type="button">Retrieve</button>
+								  </div>
+								</div>			
+						</div>
+			       		<div class="form-group">
+				            <label for="sname" class="col-form-label">Name:</label>
+				            <input type="text" class="form-control" id="retrieveSname" name="retrieveSname" placeholder="Enter name" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="age" class="col-form-label">Age:</label>
+				            <input type="text" class="form-control" id="retrieveAge" name="retrieveAge" placeholder="Enter age" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="email" class="col-form-label">Email:</label>
+				            <input type="text" class="form-control" id="retrieveEmail" name="retrieveEmail" placeholder="Enter email" required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="mobile" class="col-form-label">Mobile number:</label>
+				            <input type="text" class="form-control" id="retrieveMobile" name="retrieveMobile" placeholder="Enter mobile number"required>
+			          </div>
+			       		<div class="form-group">
+				            <label for="address" class="col-form-label">Address:</label>
+				            <input type="text" class="form-control" id="retrieveAddress" name="retrieveAddress" placeholder="Enter address" required>
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer border-0 d-flex justify-content-between mx-3 mb-3">
+			      	<button type="button" class="btn close-button btn-secondary" onClick="window.location.reload()" data-dismiss="modal">Close</button>
+			        <button type="button" id="updateButton" class="btn primary submit-button btn-primary">Update Student</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+			<!-- Delete Modal -->
+			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="#deleteModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header border-0">
+			      <div class="d-flex flex-column mx-3 pb-0">
+			     	<h4 class="modal-title " id="#deleteModalLabel">Delete student</h4>
+			        <p class="secondaryText">Please enter an existing student id in order to edit data</p>
+			      </div>
+			      </div>
+			      <div class="modal-body">
+			        <form class="myform deleteform mx-3">
+			        <div class="form-group" id="formgroup">
+				            <label for="deleteid" class="col-form-label">Student Id:</label>
+				            <input type="text" class="form-control" name="deleteid" id="deleteid" placeholder="Enter student id">
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer border-0 d-flex justify-content-between mx-3 mb-3">
+			      	<button type="button" id="deleteclose" onClick="window.location.reload()" class="btn close-button btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" id="deleteButton" class="btn primary submit-button btn-primary">Delete Student</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		
+		</div> <!-- End of container -->
+
+	</body>
+</html>
